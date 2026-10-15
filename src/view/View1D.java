@@ -17,13 +17,16 @@ import java.awt.event.ActionListener;
 public class View1D extends JPanel implements ActionListener{
 	private Units u = new Units();
 
-	String[] rotulos = {"Deslocamento (Δx)", "Velocidade inicial (v0)", "Velocidade final (v)", "Aceleração (a)", "Tempo (t)"};
-	private String[][] nomes = {u.Comprimento, u.Velocidade, u.Velocidade, u.Aceleracao, u.Tempo};
-	private double[][] fat = {u.fComprimento, u.fVelocidade, u.fVelocidade, u.fAceleracao, u.fTempo};
-	private int[] padrao = {2, 1, 1, 1, 1};
+	String[] rotulos = {"Posição inicial (x0)", "Posição final (xf)", "Deslocamento (Δx)", "Velocidade inicial (v0)", "Velocidade final (vf)",
+			"Velocidade média (vm)", "Velocidade (Δv)", "Aceleração (a)", "Aceleração média (am)", "Tempo inicial (t0)", "Tempo final (tf)", "Tempo (Δt)", "Gravidade (g)"};
+	private String[][] nomes = {u.Comprimento, u.Comprimento, u.Comprimento, u.Velocidade, u.Velocidade, u.Velocidade, u.Velocidade,
+		    u.Aceleracao, u.Aceleracao, u.Tempo, u.Tempo, u.Tempo, u.Aceleracao};
+	private double[][] fat = {u.fComprimento, u.fComprimento, u.fComprimento, u.fVelocidade, u.fVelocidade, u.fVelocidade, u.fVelocidade,
+		    u.fAceleracao, u.fAceleracao, u.fTempo, u.fTempo, u.fTempo, u.fAceleracao};
+	private int[] padrao = {2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
 	
-	JTextField[] campos = new JTextField[5];
-	JComboBox<String>[] combos = new JComboBox[5];
+	JTextField[] campos = new JTextField[13];
+	JComboBox<String>[] combos = new JComboBox[13];
 	JComboBox<String> alvo;
 	JTextArea resultado = new JTextArea();
 	JButton botaoCalc = new JButton("Calcular");
@@ -43,7 +46,7 @@ public class View1D extends JPanel implements ActionListener{
 		grade.setBackground(Colors.get1());
 		grade.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 13; i++) {
 			campos[i] = new JTextField();
 			combos[i] = new JComboBox<String>(nomes[i]);
 			combos[i].setSelectedIndex(padrao[i]);
@@ -91,23 +94,26 @@ public class View1D extends JPanel implements ActionListener{
 		Object origem = e.getSource();
 		if (origem == botaoCalc) {
 			try {
-				Double[] x = new Double[5];
-
-				for (int i = 0; i < 5; i++) {
+				// Lê os 13 campos (já convertidos para o SI; null = campo vazio)
+				Double[] x = new Double[13];
+				for (int i = 0; i < 13; i++) {
 					x[i] = Parser.ler(campos[i], combos[i], fat[i], rotulos[i]);
 				}
-
+ 
 				int alvoidx = alvo.getSelectedIndex();
 				String target = rotulos[alvoidx];
+				double fator = fat[alvoidx][combos[alvoidx].getSelectedIndex()];
+				String unidade = (String) combos[alvoidx].getSelectedItem();
 				
-				resultado.setText(Calculo1D.calcular1D(x, alvoidx, target));
+				resultado.setText(Calculo1D.calcular1D(x, alvoidx, target, fator, unidade));
 				
 			} catch(Exception e1) {
-				
+				resultado.setText("");
+				JOptionPane.showMessageDialog(this, e1.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
 			}
 				
 		} else if (origem == botaoLimpar) {
-			for (int i = 0; i < 5; i++) {
+			for (int i = 0; i < 13; i++) {
 				campos[i].setText("");
 			}
 			resultado.setText("");
