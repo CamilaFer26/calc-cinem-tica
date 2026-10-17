@@ -17,6 +17,7 @@ public class MainView extends JFrame{
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+        tabbedPane.setFont(new Font("Monospaced", Font.PLAIN, 11));
         tabbedPane.setBackground(Colors.get2());
         getContentPane().add(tabbedPane, BorderLayout.CENTER);
         

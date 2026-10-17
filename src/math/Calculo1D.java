@@ -25,7 +25,7 @@ public class Calculo1D {
 
 	static List<PassoCalculo> historicoPassos = new ArrayList<>();
 
-	public static String calcular1D(Double[] x, int alvo, String target, double fator, String unidade) {
+	public static String calcular1D(Double[] x, int alvo, String target, double fator, String unidade, String si) {
 		if (x[alvo] != null) {
 			return "Deixe vazio o campo que deseja calcular!";
 		}
@@ -59,7 +59,7 @@ public class Calculo1D {
 		}
 	 
 		if (!sab[alvo]) {
-			return String.format("Não existe fórmula que calcule %s com os dados informados", target);
+			return String.format("Não existe fórmula que calcule %s\ncom os dados informados", target);
 		}
 	 
 		// Obtém apenas os passos essenciais para o alvo
@@ -71,7 +71,7 @@ public class Calculo1D {
 
 		String texto = "Fórmulas usadas:\n" + passosTexto.toString() + "\n";
 		texto += target + " = " + String.format("%.4f", val[alvo] / fator) + " " + unidade + "\n";
-		texto += "(em unidades do SI: " + String.format("%.6f", val[alvo]) + ")\n";
+		texto += "(em unidades do SI: " + String.format("%.6f %s", val[alvo], si) + ")\n";
 		if (!obs.equals("")) {
 			texto += "\n" + obs;
 		}
@@ -175,10 +175,10 @@ public class Calculo1D {
 
 		// queda livre: a = g (eixo positivo para baixo)
 		if (!sab[7] && sab[12]) {
-			m |= aprender(val, sab, 7, val[12], "a = g (queda livre, eixo positivo para baixo)", new int[]{12});
+			m |= aprender(val, sab, 7, val[12], "a = g (queda livre)", new int[]{12});
 		}
 		if (!sab[12] && sab[7]) {
-			m |= aprender(val, sab, 12, val[7], "g = a (queda livre, eixo positivo para baixo)", new int[]{7});
+			m |= aprender(val, sab, 12, val[7], "g = a (queda livre)", new int[]{7});
 		}
 		return m;
 	}
@@ -312,7 +312,7 @@ public class Calculo1D {
 	}
 
 	static void avisar() {
-		String msg = "Obs.: onde há raiz quadrada existem duas soluções (±); foi adotado o sinal "
+		String msg = "Obs.: onde há raiz quadrada existem duas soluções (±);\nfoi adotado o sinal "
 				+ "coerente com a direção do movimento.\n";
 		if (!obs.contains(msg)) {
 			obs += msg;

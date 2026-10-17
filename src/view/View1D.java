@@ -17,7 +17,7 @@ import java.awt.event.ActionListener;
 public class View1D extends JPanel implements ActionListener{
 	private Units u = new Units();
 
-	String[] rotulos = {"Posição inicial (x0)", "Posição final (xf)", "Deslocamento (Δx)", "Velocidade inicial (v0)", "Velocidade final (vf)",
+	String[] rotulos = {"Posição inicial (x0)", "Posição final (xf)", "Deslocamento (Δx)", "Vel. inicial (v0)", "Velocidade final (vf)",
 			"Velocidade média (vm)", "Velocidade (Δv)", "Aceleração (a)", "Aceleração média (am)", "Tempo inicial (t0)", "Tempo final (tf)", "Tempo (Δt)", "Gravidade (g)"};
 	private String[][] nomes = {u.Comprimento, u.Comprimento, u.Comprimento, u.Velocidade, u.Velocidade, u.Velocidade, u.Velocidade,
 		    u.Aceleracao, u.Aceleracao, u.Tempo, u.Tempo, u.Tempo, u.Aceleracao};
@@ -38,7 +38,7 @@ public class View1D extends JPanel implements ActionListener{
 		setLayout(null);
 		
 		JPanel panel = new JPanel(new BorderLayout());
-		panel.setBounds(10, 11, 436, 558);
+		panel.setBounds(10, 11, 486, 558);
 		panel.setBackground(Colors.get1());
 		add(panel);
 
@@ -48,17 +48,26 @@ public class View1D extends JPanel implements ActionListener{
 		
 		for (int i = 0; i < 13; i++) {
 			campos[i] = new JTextField();
+			campos[i].setFont(new Font("Monospaced", Font.PLAIN, 11));
+			
 			combos[i] = new JComboBox<String>(nomes[i]);
 			combos[i].setSelectedIndex(padrao[i]);
+			combos[i].setFont(new Font("Monospaced", Font.PLAIN, 11));
 			
-			grade.add(new JLabel(rotulos[i]));
+			JLabel rotulo = new JLabel(rotulos[i]);
+			rotulo.setFont(new Font("Monospaced", Font.PLAIN, 11));
+			
+			grade.add(rotulo);
 			grade.add(campos[i]);
 			grade.add(combos[i]);
 
 		}
 		
 		alvo = new JComboBox<String>(rotulos);
-		grade.add(new JLabel("Quero calcular:"));
+		alvo.setFont(new Font("Monospaced", Font.PLAIN, 11));
+		JLabel label = new JLabel("Quero calcular:");
+		label.setFont(new Font("Monospaced", Font.PLAIN, 11));
+		grade.add(label);
 		grade.add(alvo);
 		grade.add(new JLabel(""));
 		  
@@ -71,12 +80,14 @@ public class View1D extends JPanel implements ActionListener{
 
 		JPanel panel2 = new JPanel(new BorderLayout());
 		panel2.setBackground(Colors.get5());
-		panel2.setBounds(456, 172, 359, 241);
+		panel2.setBounds(506, 172, 309, 241);
 		add(panel2);
 
 		JPanel botoes = new JPanel();
 		botoes.setBackground(Colors.get1());
+		botaoCalc.setFont(new Font("Monospaced", Font.PLAIN, 11));
 		botoes.add(botaoCalc);
+		botaoLimpar.setFont(new Font("Monospaced", Font.PLAIN, 11));
 		botoes.add(botaoLimpar);
 
 		botaoCalc.addActionListener(this);
@@ -86,6 +97,12 @@ public class View1D extends JPanel implements ActionListener{
 		panel.add(grade, BorderLayout.NORTH);
 		panel2.add(new JScrollPane(resultado), BorderLayout.CENTER);
 		panel.add(botoes, BorderLayout.CENTER);
+		
+		JLabel lblNewLabel = new JLabel("Resultado:");
+		lblNewLabel.setFont(new Font("Monospaced", Font.BOLD, 20));
+		lblNewLabel.setBounds(506, 145, 166, 25);
+		lblNewLabel.setForeground(Colors.get2());
+		add(lblNewLabel);
 		
 	}
 
@@ -104,8 +121,9 @@ public class View1D extends JPanel implements ActionListener{
 				String target = rotulos[alvoidx];
 				double fator = fat[alvoidx][combos[alvoidx].getSelectedIndex()];
 				String unidade = (String) combos[alvoidx].getSelectedItem();
+				String si = combos[alvoidx].getItemAt(padrao[alvoidx]);
 				
-				resultado.setText(Calculo1D.calcular1D(x, alvoidx, target, fator, unidade));
+				resultado.setText(Calculo1D.calcular1D(x, alvoidx, target, fator, unidade, si));
 				
 			} catch(Exception e1) {
 				resultado.setText("");
@@ -119,6 +137,4 @@ public class View1D extends JPanel implements ActionListener{
 			resultado.setText("");
 		}
 	}
-	
-	
 }
