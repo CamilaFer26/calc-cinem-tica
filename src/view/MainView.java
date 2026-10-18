@@ -24,6 +24,12 @@ public class MainView extends JFrame{
         View1D aba1D = new View1D();
         ImageIcon icon = new ImageIcon();
         tabbedPane.addTab("Cálculos 1D", icon, aba1D, "Navegue por fórmulas cinemáticas em uma dimensão!");
+        
+        View2D aba2D = new View2D();
+        ImageIcon icon2D = new ImageIcon();
+        tabbedPane.addTab("Cálculos 2D", icon2D, aba2D, "Navegue por fórmulas cinemáticas em duas dimensões!");        
+       
+
        
     }
     
