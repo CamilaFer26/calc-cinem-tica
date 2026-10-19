@@ -59,7 +59,7 @@ util/
 ```mermaid
 classDiagram
     direction TB
-
+ 
     class JFrame {
         <<Swing>>
     }
@@ -70,12 +70,12 @@ classDiagram
         <<interface>>
         +actionPerformed(ActionEvent e) void
     }
-
+ 
     class MainView {
         +MainView()
         +main(String[] args)$ void
     }
-
+ 
     class View1D {
         -Units u
         ~String[] rotulos
@@ -91,7 +91,7 @@ classDiagram
         +View1D()
         +actionPerformed(ActionEvent e) void
     }
-
+ 
     class View2D {
         -Units u
         ~String[] rotulos
@@ -107,7 +107,7 @@ classDiagram
         +View2D()
         +actionPerformed(ActionEvent e) void
     }
-
+ 
     class Calculo1D {
         ~String[] simb$
         ~String obs$
@@ -123,7 +123,7 @@ classDiagram
         ~equacaoCinematica(...)$ boolean
         ~avisar()$ void
     }
-
+ 
     class Calculo2D {
         ~String[] simb$
         ~String obs$
@@ -138,14 +138,14 @@ classDiagram
         ~equacaoEixo(...)$ boolean
         ~avisar()$ void
     }
-
+ 
     class PassoCalculo {
         ~int varCalculada
         ~List~Integer~ deps
         ~String formula
         ~PassoCalculo(int, List~Integer~, String)
     }
-
+ 
     class Units {
         +String[] Comprimento$
         +double[] fComprimento$
@@ -158,11 +158,11 @@ classDiagram
         +String[] Angulo$
         +double[] fAngulo$
     }
-
+ 
     class Parser {
         +ler(JTextField, JComboBox~String~, double[], String)$ Double
     }
-
+ 
     class Colors {
         +get1()$ Color
         +get2()$ Color
@@ -170,16 +170,16 @@ classDiagram
         +get4()$ Color
         +get5()$ Color
     }
-
+ 
     JFrame <|-- MainView : extends
     JPanel <|-- View1D : extends
     JPanel <|-- View2D : extends
     ActionListener <|.. View1D : implements
     ActionListener <|.. View2D : implements
-
+ 
     MainView *-- View1D : aba
     MainView *-- View2D : aba
-
+ 
     View1D --> Calculo1D : usa
     View2D --> Calculo2D : usa
     View1D --> Parser : usa
@@ -189,9 +189,9 @@ classDiagram
     MainView ..> Colors
     View1D ..> Colors
     View2D ..> Colors
-
-    Calculo1D +-- PassoCalculo : classe aninhada
-    Calculo2D +-- PassoCalculo : classe aninhada
+ 
+    Calculo1D *-- PassoCalculo : classe aninhada
+    Calculo2D *-- PassoCalculo : classe aninhada
 ```
 
 ### Observações de projeto
