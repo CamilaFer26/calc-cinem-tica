@@ -16,9 +16,9 @@ public class View2D extends JPanel implements ActionListener {
 
     private Units u = new Units();
 
-    String[] rotulos = {"Posição inicial X (x0)", "Posição final X (xf)", "Deslocamento X (Δx)", "Velocidade inicial X (v0x)", "Velocidade final X (vfx)", "Velocidade média X (vmx)",
-        "Variação velocidade X (Δvx)", "Aceleração X (ax)", "Aceleração média X (amx)", "Tempo inicial (t0)", "Tempo final (tf)", "Tempo (Δt)",
-        "Gravidade (g)", "Posição inicial Y (y0)", "Posição final Y (yf)", "Deslocamento Y (Δy)", "Velocidade inicial Y (v0y)", "Velocidade final Y (vfy)", "Ângulo inicial (θ0)" };
+    String[] rotulos = {"Posição inicial (x0)", "Posição final (xf)", "Deslocamento (Δx)", "Vel. inicial (v0x)", "Vel. final (vfx)", "Vel. média (vmx)",
+        "Variação vel. (Δvx)", "Aceleração (ax)", "Aceler. média (amx)", "Tempo inicial (t0)", "Tempo final (tf)", "Tempo (Δt)",
+        "Gravidade (g)", "Posição inicial (y0)", "Posição final (yf)", "Deslocamento (Δy)", "Vel. inicial (v0y)", "Vel. final (vfy)", "Ângulo inicial (θ0)" };
 
     private String[][] nomes = {u.Comprimento, u.Comprimento, u.Comprimento,u.Velocidade, u.Velocidade, u.Velocidade, u.Velocidade,
         u.Aceleracao, u.Aceleracao, u.Tempo, u.Tempo, u.Tempo, u.Aceleracao, u.Comprimento, u.Comprimento, u.Comprimento, u.Velocidade, u.Velocidade, {"°"} };
@@ -42,7 +42,7 @@ public class View2D extends JPanel implements ActionListener {
         setLayout(null);
 
         JPanel panel = new JPanel(new BorderLayout());
-        panel.setBounds(10, 11, 436, 558);
+        panel.setBounds(10, 11, 486, 558);
         panel.setBackground(Colors.get1());
         add(panel);
 
@@ -56,7 +56,7 @@ public class View2D extends JPanel implements ActionListener {
 
             combos[i] = new JComboBox<String>(nomes[i]);
             combos[i].setSelectedIndex(padrao[i]);
-            campos[i].setFont(new Font("Monospaced", Font.PLAIN, 11));
+            combos[i].setFont(new Font("Monospaced", Font.PLAIN, 11));
 
             JLabel rotulo = new JLabel(rotulos[i]);
 			rotulo.setFont(new Font("Monospaced", Font.PLAIN, 11));
@@ -81,7 +81,7 @@ public class View2D extends JPanel implements ActionListener {
 
         JPanel panel2 = new JPanel(new BorderLayout());
         panel2.setBackground(Colors.get5());
-        panel2.setBounds(456, 172, 359, 241);
+        panel2.setBounds(506, 172, 309, 241);
         add(panel2);
 
         JPanel botoes = new JPanel();
