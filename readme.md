@@ -194,6 +194,10 @@ classDiagram
     Calculo2D *-- PassoCalculo : classe aninhada
 ```
 
+## Link para Vídeo de Apresentação
+https://drive.google.com/file/d/1mquVF1s8arTHisjKV4G3hMeS5denWw1Z/view?usp=drive_link
+
+
 ### Observações de projeto
 
 - **Interfaces:** o projeto não define interfaces próprias; implementa `ActionListener` (Swing) em `View1D` e `View2D` para tratar os botões.
